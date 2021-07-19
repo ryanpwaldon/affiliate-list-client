@@ -1,20 +1,10 @@
 {
-  "name": "barebone",
+  "name": "affiliate-list",
   "private": true,
   "scripts": {
     "build": "gridsome build",
     "develop": "gridsome develop",
-    "explore": "gridsome explore",
-    "lint:check": "eslint --ext .ts,.vue ./src",
-    "lint:fix": "yarn lint:check --fix"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
-  "lint-staged": {
-    "*.(vue|ts)": "yarn lint:check"
+    "explore": "gridsome explore"
   },
   "dependencies": {
     "@gridsome/source-airtable": "^0.2.0",
