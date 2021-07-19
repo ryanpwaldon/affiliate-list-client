@@ -1,6 +1,5 @@
 module.exports = {
   siteName: 'Affiliate list',
-  icon: 'src/assets/logo.png',
   plugins: [
     { use: 'gridsome-plugin-typescript' },
     { use: 'gridsome-plugin-composition-api' },
