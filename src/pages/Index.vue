@@ -51,10 +51,10 @@ export default defineComponent({
   },
   setup() {
     const filters = ref()
-    const programs = ref([] as any[])
     const page = usePageQuery()
-    const allProgams = page.programs.edges.map((edge: any) => edge.node)
+    const programs = ref([] as any[])
     const handleInput = (event: any) => (filters.value = event)
+    const allProgams = page.programs.edges.map((edge: any) => edge.node)
     watch(filters, () => (programs.value = filterPrograms(allProgams, filters.value)))
     return { handleInput, programs }
   }

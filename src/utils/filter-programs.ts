@@ -32,7 +32,7 @@ export default (allPrograms: any[], rawFilters: any) => {
     payoutStructures: validateArrayOfStrings(rawFilters.payoutStructures)
   }
 
-  const pageSize = 5
+  const pageSize = 30
   const pageOffset = filters.page * pageSize - pageSize
 
   // prettier-ignore
