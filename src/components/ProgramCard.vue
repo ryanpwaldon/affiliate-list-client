@@ -39,8 +39,10 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from '@vue/composition-api'
+import { defineComponent } from '@vue/composition-api'
+import Badge from '~/components/Badge.vue'
 export default defineComponent({
+  components: { Badge },
   props: {
     program: {
       type: Object,

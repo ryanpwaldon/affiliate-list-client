@@ -1,21 +1,18 @@
 <template>
-    <main class="flex min-h-screen bg-white text-gray-800 antialiased font-sans">
-        <section class="flex flex-grow" id="main-content" key="main">
-            <slot />
-        </section>
-    </main>
+  <div>
+    <Header />
+    <div class="w-full px-5">
+      <div class="m-auto max-w-7xl">
+        <slot />
+      </div>
+    </div>
+  </div>
 </template>
 
 <script lang="ts">
-import Vue from "vue";
-
-export default Vue.extend({
-    name: "Layout",
-    mounted()
-    {
-        // This is nessecary because of Gridsome.
-        // vue-i18n isn't officially supported yet.
-        this.$i18n.locale = window.navigator.language;
-    },
-});
+import { defineComponent } from '@vue/composition-api'
+import Header from '../components/Header.vue'
+export default defineComponent({
+  components: { Header }
+})
 </script>
