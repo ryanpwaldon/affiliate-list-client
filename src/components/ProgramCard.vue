@@ -1,8 +1,5 @@
 <template>
-  <g-link
-    :to="`/program/${program.id}/`"
-    class="p-6 text-left bg-white border border-gray-300 rounded cursor-pointer select-none group hover:border-gray-800"
-  >
+  <g-link :to="`/program/${program.id}/`" class="p-6 text-left bg-white border border-gray-200 rounded-sm cursor-pointer select-none">
     <div class="flex items-center w-full space-x-3">
       <div class="flex items-center justify-center flex-shrink-0 w-16 h-16 overflow-hidden border border-gray-300 rounded-full">
         <div
@@ -13,11 +10,12 @@
         <div v-else class="font-serif text-4xl text-gray-800 leading-[29px] h-[26px]">{{ program.company[0] }}</div>
       </div>
       <div class="w-full">
-        <div class="relative w-full font-medium">
+        <div class="relative w-full mb-1 font-medium">
           <p>{{ program.company }}</p>
         </div>
-        <div class="flex mt-1 space-x-1">
-          <Badge v-for="(category, i) in program.categories" :key="i" :text="category" theme="lightGray" />
+        <div class="flex flex-wrap overflow-hidden h-[30px] flex-gap-1">
+          <Badge v-if="program.isNew" text="New" theme="red" />
+          <Badge v-for="(category, i) in program.categories" :key="i" :text="category" theme="gray" />
         </div>
       </div>
     </div>
@@ -26,12 +24,12 @@
     </p>
     <div class="mt-5 space-y-3 text-xs font-medium text-gray-500">
       <div class="flex justify-between">
-        <p>Payout structure</p>
-        <Badge :text="program.payoutStructure" />
-      </div>
-      <div class="flex justify-between">
         <p>Commission</p>
         <Badge :text="program.commission" />
+      </div>
+      <div class="flex justify-between">
+        <p>Payout structure</p>
+        <Badge :text="program.payoutStructure" />
       </div>
       <div class="flex justify-between">
         <p>Cookie duration</p>
@@ -42,8 +40,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from '@vue/composition-api'
 import Badge from '~/components/Badge.vue'
+import { defineComponent } from '@vue/composition-api'
 export default defineComponent({
   components: { Badge },
   props: {

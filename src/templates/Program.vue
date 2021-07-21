@@ -1,6 +1,6 @@
 <template>
   <Layout max-width="max-w-5xl">
-    <h1 class="mt-16 font-serif text-4xl font-medium text-gray-500">Affiliate program</h1>
+    <h1 class="mt-16 font-serif text-4xl font-medium">Affiliate program</h1>
     <div class="flex items-center w-full mt-16 space-x-3">
       <div class="flex items-center justify-center flex-shrink-0 w-16 h-16 overflow-hidden border border-gray-300 rounded-full">
         <div
@@ -15,7 +15,7 @@
           <p>{{ $page.program.company }}</p>
         </div>
         <div class="flex mt-1 space-x-1">
-          <Badge v-for="(category, i) in $page.program.categories" :key="i" :text="category" theme="lightWhite" />
+          <Badge v-for="(category, i) in $page.program.categories" :key="i" :text="category" theme="white" />
         </div>
       </div>
     </div>

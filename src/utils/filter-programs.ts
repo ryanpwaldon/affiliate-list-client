@@ -51,9 +51,13 @@ export default (allPrograms: any[], rawFilters: any) => {
     commission: [ { [filters.sortOrder]: (program: any) => program.commissionPercentUpper }, { [filters.sortOrder]: (program: any) => program.commissionFixedUpper } ]
   }[filters.sortBy]
 
+  const total = programs.length
   inPlaceSort(programs).by(sortFunction as any)
   programs.splice(0, pageOffset)
   programs.splice(pageSize)
 
-  return programs
+  return {
+    programs,
+    total
+  }
 }

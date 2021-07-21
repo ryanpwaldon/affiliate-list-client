@@ -27,7 +27,7 @@ export default defineComponent({
   },
   setup(props) {
     const sizeClasses = {
-      xs: 'rounded px-2.5 py-1.5 text-xs font-medium',
+      xs: 'rounded-sm px-2.5 py-1.5 text-xs font-medium',
       sm: 'rounded-md px-3 py-2 text-sm font-medium'
     }[props.size]
     // prettier-ignore

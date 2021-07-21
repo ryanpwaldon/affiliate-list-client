@@ -1,24 +1,28 @@
 <template>
   <form class="font-medium text-gray-500">
-    <!-- <div class="py-2 mt-3 text-gray-500 border-b border-gray-300">
-      <p><span class="text-red-600">All</span> affiliate programs</p>
-    </div> -->
-    <div class="py-2 mt-3 text-gray-800 border-b border-gray-300">
+    <div class="mt-3 text-gray-500">
+      <p class="mb-2">Search summary</p>
+      <div class="flex flex-wrap w-full flex-gap-1" v-if="searchSummary.length">
+        <Badge :text="value" theme="white" v-for="(value, i) in searchSummary" :key="i" />
+      </div>
+      <Badge text="All Affiliate Programs" theme="white" v-else />
+    </div>
+    <div class="py-2 mt-3 border-b border-gray-300">
       <p>Sort by</p>
     </div>
-    <Accordion :title="sortLabels.sortBy">
+    <Accordion :title="sortLabels.sortBy" class="text-gray-800">
       <InputRadio class="pt-1 pb-3" :options="Object.values(sortByOptions)" name="sortBy" v-model="fields.sortBy.value" />
     </Accordion>
-    <Accordion :title="sortLabels.sortOrder">
+    <Accordion :title="sortLabels.sortOrder" class="text-gray-800">
       <InputRadio class="pt-1 pb-3" :options="Object.values(sortOrderOptions)" name="sortOrder" v-model="fields.sortOrder.value" />
     </Accordion>
-    <div class="py-2 mt-3 text-gray-800 border-b border-gray-300">
+    <div class="py-2 mt-3 border-b border-gray-300">
       <p>Filter by</p>
     </div>
-    <Accordion title="Industry">
+    <Accordion title="Category" class="text-gray-800">
       <InputCheckbox class="pt-1 pb-3" :options="Object.values(categoriesOptions)" name="categories" v-model="fields.categories.value" />
     </Accordion>
-    <Accordion title="Payout structure">
+    <Accordion title="Payout structure" class="text-gray-800">
       <InputCheckbox
         class="pt-1 pb-3"
         :options="Object.values(payoutStructureOptions)"
@@ -26,13 +30,17 @@
         v-model="fields.payoutStructures.value"
       />
     </Accordion>
-    <Accordion title="Commission type">
+    <Accordion title="Commission type" class="text-gray-800">
       <InputCheckbox class="pt-1 pb-3" :options="Object.values(commissionTypeOptions)" name="commissionType" v-model="fields.commissionTypes.value" />
     </Accordion>
+    <div class="py-2 mt-3 text-gray-500">
+      <p>Showing {{ totalResults }} results</p>
+    </div>
   </form>
 </template>
 
 <script lang="ts">
+import Badge from './Badge.vue'
 import Accordion from './Accordion.vue'
 import InputRadio from './InputRadio.vue'
 import { array, object, string } from 'yup'
@@ -74,7 +82,8 @@ const categoriesOptions = {
 }
 
 export default defineComponent({
-  components: { Accordion, InputRadio, InputCheckbox },
+  components: { Accordion, InputRadio, InputCheckbox, Badge },
+  props: { totalResults: { type: String, required: true } },
   setup(_, { emit }) {
     const route = useRoute()
     const router = useRouter()
@@ -96,17 +105,24 @@ export default defineComponent({
       sortBy: sortByOptions[values.value.sortBy as keyof typeof sortByOptions].label,
       sortOrder: sortOrderOptions[values.value.sortOrder as keyof typeof sortOrderOptions].label
     }))
+    const searchSummary = computed(() => [
+      ...(values.value.categories || []),
+      ...(values.value.payoutStructures || []),
+      ...(values.value.commissionTypes || [])
+    ])
     // prettier-ignore
     watch(values, () => {
       updateQuery(values.value)
       emit('input', values.value)
     })
     return {
+      values,
       fields,
       loading,
       modified,
       sortLabels,
       sortByOptions,
+      searchSummary,
       sortOrderOptions,
       categoriesOptions,
       commissionTypeOptions,

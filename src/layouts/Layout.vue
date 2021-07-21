@@ -1,7 +1,7 @@
 <template>
   <div>
     <Header />
-    <div class="w-full px-5">
+    <div class="w-full px-8">
       <div :class="['m-auto', maxWidth]">
         <slot />
       </div>
