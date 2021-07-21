@@ -1,5 +1,5 @@
 module.exports = {
-  siteName: 'Affiliate list',
+  siteName: 'Affiliate List',
   plugins: [
     { use: 'gridsome-plugin-typescript' },
     { use: 'gridsome-plugin-composition-api' },
@@ -12,6 +12,9 @@ module.exports = {
       }
     }
   ],
+  templates: {
+    Program: '/program/:id/'
+  },
   css: {
     loaderOptions: {
       postcss: {

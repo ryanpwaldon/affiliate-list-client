@@ -1,6 +1,9 @@
 <template>
   <form class="font-medium text-gray-500">
-    <div class="py-2 text-gray-800 border-b border-gray-300">
+    <!-- <div class="py-2 mt-3 text-gray-500 border-b border-gray-300">
+      <p><span class="text-red-600">All</span> affiliate programs</p>
+    </div> -->
+    <div class="py-2 mt-3 text-gray-800 border-b border-gray-300">
       <p>Sort by</p>
     </div>
     <Accordion :title="sortLabels.sortBy">
@@ -9,10 +12,10 @@
     <Accordion :title="sortLabels.sortOrder">
       <InputRadio class="pt-1 pb-3" :options="Object.values(sortOrderOptions)" name="sortOrder" v-model="fields.sortOrder.value" />
     </Accordion>
-    <div class="py-2 text-gray-800 border-b border-gray-300">
+    <div class="py-2 mt-3 text-gray-800 border-b border-gray-300">
       <p>Filter by</p>
     </div>
-    <Accordion title="Categories">
+    <Accordion title="Industry">
       <InputCheckbox class="pt-1 pb-3" :options="Object.values(categoriesOptions)" name="categories" v-model="fields.categories.value" />
     </Accordion>
     <Accordion title="Payout structure">
@@ -51,23 +54,23 @@ const sortOrderOptions = {
 }
 
 const commissionTypeOptions = {
-  percentage: { label: 'Percentage', value: 'percentage' },
-  fixed: { label: 'Fixed', value: 'fixed' }
+  Percent: { label: 'Percent', value: 'Percent' },
+  Fixed: { label: 'Fixed', value: 'Fixed' }
 }
 
 const payoutStructureOptions = {
-  recurring: { label: 'Recurring', value: 'recurring' },
-  perSale: { label: 'Per Sale', value: 'perSale' },
-  perClick: { label: 'Per Click', value: 'perClick' }
+  Recurring: { label: 'Recurring', value: 'Recurring' },
+  'Per Sale': { label: 'Per Sale', value: 'Per Sale' },
+  'Per Click': { label: 'Per Click', value: 'Per Click' }
 }
 
 const categoriesOptions = {
-  software: { label: 'Software', value: 'software' },
-  ecommerce: { label: 'Ecommerce', value: 'ecommerce' },
-  clothingAndRetail: { label: 'Clothing & Apparel', value: 'clothingAndApparel' },
-  foodAndBeverage: { label: 'Food & Beverage', value: 'foodAndBeverage' },
-  finance: { label: 'Finance', value: 'finance' },
-  travel: { label: 'Travel', value: 'Travel' }
+  Software: { label: 'Software', value: 'Software' },
+  Ecommerce: { label: 'Ecommerce', value: 'Ecommerce' },
+  'Clothing & Apparel': { label: 'Clothing & Apparel', value: 'Clothing & Apparel' },
+  'Food & Beverage': { label: 'Food & Beverage', value: 'Food & Beverage' },
+  Finance: { label: 'Finance', value: 'Finance' },
+  Travel: { label: 'Travel', value: 'Travel' }
 }
 
 export default defineComponent({

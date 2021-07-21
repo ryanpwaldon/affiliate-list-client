@@ -20,6 +20,8 @@ export default defineComponent({
     // prettier-ignore
     const themeClasses = computed(() => ({
       lightGray: 'bg-gray-100 text-gray-500',
+      lightWhite: 'bg-white text-gray-500',
+      white: 'bg-white text-gray-800',
       gray: 'bg-gray-100 text-gray-800',
       red: 'bg-red-100 text-red-800',
       orange: 'bg-orange-100 text-orange-800',

@@ -1,5 +1,8 @@
 <template>
-  <div class="p-6 text-left bg-white border border-gray-300 cursor-pointer select-none group hover:border-gray-800">
+  <g-link
+    :to="`/program/${program.id}/`"
+    class="p-6 text-left bg-white border border-gray-300 rounded cursor-pointer select-none group hover:border-gray-800"
+  >
     <div class="flex items-center w-full space-x-3">
       <div class="flex items-center justify-center flex-shrink-0 w-16 h-16 overflow-hidden border border-gray-300 rounded-full">
         <div
@@ -35,7 +38,7 @@
         <Badge :text="program.cookieDuration" />
       </div>
     </div>
-  </div>
+  </g-link>
 </template>
 
 <script lang="ts">

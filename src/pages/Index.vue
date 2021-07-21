@@ -1,7 +1,7 @@
 <template>
   <Layout>
     <div class="pt-16 font-serif text-4xl font-medium">The world's largest directory of<br />affiliate marketing programs.</div>
-    <div class="flex w-full mt-16 space-x-8">
+    <div class="flex w-full mt-16 mb-16 space-x-8">
       <Filters class="sticky self-start w-1/4 top-8" @input="handleInput" />
       <div class="grid self-start w-full grid-cols-3 gap-8">
         <ProgramCard :key="i" :program="program" v-for="(program, i) in programs" />
@@ -43,8 +43,11 @@ import Filters from '../components/Filters.vue'
 import filterPrograms from '../utils/filter-programs'
 import ProgramCard from '~/components/ProgramCard.vue'
 import usePageQuery from '../composables/usePageQuery'
-import { computed, defineComponent, ref, watch } from '@vue/composition-api'
+import { defineComponent, ref, watch } from '@vue/composition-api'
 export default defineComponent({
+  metaInfo: {
+    title: 'The Worlds Largest Directory of Affiliate Marketing Programs'
+  },
   components: {
     ProgramCard,
     Filters

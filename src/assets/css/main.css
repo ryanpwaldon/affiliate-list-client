@@ -9,3 +9,7 @@ html {
   @apply bg-gray-100;
   @apply text-gray-800;
 }
+
+body {
+  @apply text-sm;
+}
