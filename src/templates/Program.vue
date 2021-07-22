@@ -41,6 +41,10 @@
           <p class="font-medium text-gray-500">Cookie duration</p>
           <Badge :text="$page.program.cookieDuration" theme="white" />
         </div>
+        <div class="flex items-center justify-between">
+          <p class="font-medium text-gray-500">Affiliate network</p>
+          <Badge :text="$page.program.affiliateNetwork" theme="white" />
+        </div>
       </div>
     </div>
   </Layout>
@@ -58,6 +62,7 @@ query ($id: ID!) {
     commissionType
     payoutStructure
     cookieDuration
+    affiliateNetwork
     createdAt
     logo {
       url

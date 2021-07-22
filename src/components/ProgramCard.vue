@@ -1,5 +1,11 @@
 <template>
-  <g-link :to="`/program/${program.id}/`" class="p-6 text-left bg-white border border-gray-200 rounded-sm cursor-pointer select-none">
+  <g-link
+    :to="`/program/${program.id}/`"
+    class="relative p-6 text-left bg-white border border-gray-200 rounded-sm cursor-pointer select-none group hover:bg-gray-50"
+  >
+    <a :href="program.mainSite" target="_blank" class="box-content absolute top-0 right-0 hidden p-2 group-hover:block" @click.stop>
+      <Outlink class="w-[10px] h-[10px]" />
+    </a>
     <div class="flex items-center w-full space-x-3">
       <div class="flex items-center justify-center flex-shrink-0 w-16 h-16 overflow-hidden border border-gray-300 rounded-full">
         <div
@@ -41,9 +47,10 @@
 
 <script lang="ts">
 import Badge from '~/components/Badge.vue'
+import Outlink from '../icons/Outlink.vue'
 import { defineComponent } from '@vue/composition-api'
 export default defineComponent({
-  components: { Badge },
+  components: { Badge, Outlink },
   props: {
     program: {
       type: Object,

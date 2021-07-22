@@ -1,6 +1,27 @@
 <template>
   <Layout>
     <div class="pt-16 font-serif text-4xl font-medium">The world's largest directory of<br />affiliate marketing programs.</div>
+    <div class="mt-16">
+      <p class="font-medium text-gray-500">Quick filters</p>
+      <div class="flex mt-3 space-x-3">
+        <Card class="flex-col items-start py-3 pl-6 pr-8">
+          <p class="font-serif text-xs text-gray-500">Sort</p>
+          <p>Newly added</p>
+        </Card>
+        <Card class="flex-col items-start py-3 pl-6 pr-8">
+          <p class="font-serif text-xs text-gray-500">Category</p>
+          <p>Software</p>
+        </Card>
+        <Card class="flex-col items-start py-3 pl-6 pr-8">
+          <p class="font-serif text-xs text-gray-500">Category</p>
+          <p>Fashion</p>
+        </Card>
+        <Card class="flex-col items-start py-3 pl-6 pr-8">
+          <p class="font-serif text-xs text-gray-500">Payout model</p>
+          <p>Revenue Share</p>
+        </Card>
+      </div>
+    </div>
     <div class="grid w-full grid-cols-4 gap-8 mt-16">
       <Filters class="sticky self-start col-span-1 top-8" @input="handleInput" :total-results="total" />
       <div class="col-span-3">
@@ -17,16 +38,16 @@
         </button>
         <h3 class="mt-16 font-serif text-2xl font-medium">Explore by category</h3>
         <div class="grid grid-cols-5 gap-8 mt-8">
-          <CategoryCard>Ecommerce</CategoryCard>
-          <CategoryCard>Software</CategoryCard>
-          <CategoryCard>Fashion</CategoryCard>
-          <CategoryCard>Food</CategoryCard>
-          <CategoryCard>Travel</CategoryCard>
-          <CategoryCard>Gaming</CategoryCard>
-          <CategoryCard>Ecommerce</CategoryCard>
-          <CategoryCard>Software</CategoryCard>
-          <CategoryCard>Fashion</CategoryCard>
-          <CategoryCard>Food</CategoryCard>
+          <Card>Ecommerce</Card>
+          <Card>Software</Card>
+          <Card>Fashion</Card>
+          <Card>Food</Card>
+          <Card>Travel</Card>
+          <Card>Gaming</Card>
+          <Card>Ecommerce</Card>
+          <Card>Software</Card>
+          <Card>Fashion</Card>
+          <Card>Food</Card>
         </div>
       </div>
     </div>
@@ -52,6 +73,7 @@
           payoutStructure
           cookieDuration
           createdAt
+          mainSite
           isNew
           logo {
             url
@@ -63,18 +85,18 @@
 </page-query>
 
 <script lang="ts">
+import Card from '../components/Card.vue'
 import Filters from '../components/Filters.vue'
 import filterPrograms from '../utils/filter-programs'
 import ProgramCard from '~/components/ProgramCard.vue'
 import usePageQuery from '../composables/usePageQuery'
 import { defineComponent, ref, watch } from '@vue/composition-api'
-import CategoryCard from '../components/CategoryCard.vue'
 export default defineComponent({
   metaInfo: {
     title: 'The Worlds Largest Directory of Affiliate Marketing Programs'
   },
   components: {
-    CategoryCard,
+    Card,
     ProgramCard,
     Filters
   },
