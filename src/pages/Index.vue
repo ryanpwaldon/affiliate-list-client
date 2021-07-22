@@ -1,6 +1,6 @@
 <template>
   <Layout>
-    <div class="pt-16 font-serif text-4xl font-medium">The world's largest directory of<br />affiliate marketing programs.</div>
+    <div class="pt-16 font-serif text-4xl font-medium">Find an affiliate program<br />that resonates with your audience.</div>
     <div class="mt-16">
       <p class="font-medium text-gray-500">Quick filters</p>
       <div class="flex mt-3 space-x-3">
