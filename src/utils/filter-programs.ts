@@ -46,7 +46,7 @@ export default (allPrograms: any[], rawFilters: any) => {
 
   // prettier-ignore
   const sortFunction = {
-    popularity: [{ [filters.sortOrder]: (program: any) => parseInt(program.id) }],
+    popularity: [{ [filters.sortOrder]: (program: any) => program.company }],
     dateAdded: [{ [filters.sortOrder]: (program: any) => program.createdAt }],
     commission: [ { [filters.sortOrder]: (program: any) => program.commissionPercentUpper }, { [filters.sortOrder]: (program: any) => program.commissionFixedUpper } ]
   }[filters.sortBy]

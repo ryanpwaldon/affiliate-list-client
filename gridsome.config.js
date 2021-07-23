@@ -8,12 +8,42 @@ module.exports = {
       options: {
         apiKey: process.env.AIRTABLE_API_KEY,
         base: process.env.AIRTABLE_BASE_ID,
-        tables: [{ name: 'programs', typeName: 'Program' }]
+        tables: [
+          {
+            name: 'programs',
+            typeName: 'Program',
+            links: [
+              {
+                fieldName: 'categories',
+                typeName: 'Category'
+              },
+              {
+                fieldName: 'affiliateNetwork',
+                typeName: 'Network',
+                linkToFirst: true
+              }
+            ]
+          },
+          {
+            name: 'categories',
+            typeName: 'Category',
+            links: [
+              {
+                fieldName: 'programs',
+                typeName: 'Program'
+              }
+            ]
+          },
+          {
+            name: 'networks',
+            typeName: 'Network'
+          }
+        ]
       }
     }
   ],
   templates: {
-    Program: '/program/:id/'
+    Program: '/program/:slug/'
   },
   css: {
     loaderOptions: {

@@ -1,6 +1,6 @@
 <template>
   <g-link
-    :to="`/program/${program.id}/`"
+    :to="`/program/${program.slug}/`"
     class="relative p-6 text-left bg-white border border-gray-200 rounded-sm cursor-pointer select-none group hover:bg-gray-50"
   >
     <a :href="program.mainSite" target="_blank" class="box-content absolute top-0 right-0 hidden p-2 group-hover:block" @click.stop>
@@ -21,25 +21,25 @@
         </div>
         <div class="flex flex-wrap overflow-hidden h-[30px] flex-gap-1">
           <Badge v-if="program.isNew" text="New" theme="red" />
-          <Badge v-for="(category, i) in program.categories" :key="i" :text="category" theme="gray" />
+          <Badge v-for="(category, i) in program.categories" :key="i" :text="category.name" theme="gray" />
         </div>
       </div>
     </div>
     <p class="mt-4 text-xs line-clamp-3">
-      {{ program.description }}
+      {{ program.excerpt }}
     </p>
     <div class="mt-5 space-y-3 text-xs font-medium text-gray-500">
       <div class="flex justify-between">
         <p>Commission</p>
-        <Badge :text="program.commission" />
+        <Badge :text="program.commissionDisplay" />
       </div>
       <div class="flex justify-between">
         <p>Payout structure</p>
         <Badge :text="program.payoutStructure" />
       </div>
-      <div class="flex justify-between">
+      <div class="flex justify-between" v-if="program.cookieDisplay">
         <p>Cookie duration</p>
-        <Badge :text="program.cookieDuration" />
+        <Badge :text="program.cookieDisplay" />
       </div>
     </div>
   </g-link>

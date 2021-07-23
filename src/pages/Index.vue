@@ -63,15 +63,17 @@
       }
       edges {
         node {
-          id
+          slug
           company
-          description
+          excerpt
           createdAt
-          categories
-          commission
+          categories {
+            name
+          }
+          commissionDisplay
           commissionType
           payoutStructure
-          cookieDuration
+          cookieDisplay
           createdAt
           mainSite
           isNew
