@@ -70,6 +70,8 @@
           categories {
             name
           }
+          commissionPercentUpperBound
+          commissionFixedUpperBound
           commissionDisplay
           commissionType
           payoutStructure

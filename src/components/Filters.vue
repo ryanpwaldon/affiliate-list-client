@@ -10,11 +10,8 @@
     <div class="py-2 mt-3 border-b border-gray-300">
       <p>Sort by</p>
     </div>
-    <Accordion :title="sortLabels.sortBy" class="text-gray-800">
+    <Accordion :title="sortByLabel" class="text-gray-800">
       <InputRadio class="pt-1 pb-3" :options="Object.values(sortByOptions)" name="sortBy" v-model="fields.sortBy.value" />
-    </Accordion>
-    <Accordion :title="sortLabels.sortOrder" class="text-gray-800">
-      <InputRadio class="pt-1 pb-3" :options="Object.values(sortOrderOptions)" name="sortOrder" v-model="fields.sortOrder.value" />
     </Accordion>
     <div class="py-2 mt-3 border-b border-gray-300">
       <p>Filter by</p>
@@ -22,16 +19,13 @@
     <Accordion title="Category" class="text-gray-800">
       <InputCheckbox class="pt-1 pb-3" :options="Object.values(categoriesOptions)" name="categories" v-model="fields.categories.value" />
     </Accordion>
-    <Accordion title="Payout structure" class="text-gray-800">
+    <Accordion title="Payout model" class="text-gray-800">
       <InputCheckbox
         class="pt-1 pb-3"
         :options="Object.values(payoutStructureOptions)"
         name="payoutStructure"
         v-model="fields.payoutStructures.value"
       />
-    </Accordion>
-    <Accordion title="Commission type" class="text-gray-800">
-      <InputCheckbox class="pt-1 pb-3" :options="Object.values(commissionTypeOptions)" name="commissionType" v-model="fields.commissionTypes.value" />
     </Accordion>
     <div class="py-2 mt-3 text-gray-500">
       <p>Showing {{ totalResults }} results</p>
@@ -51,19 +45,9 @@ import useRouter from '../composables/useRouter'
 import { ref, computed, defineComponent, watch } from '@vue/composition-api'
 
 const sortByOptions = {
-  popularity: { label: 'Popularity', value: 'popularity' },
-  dateAdded: { label: 'Date added', value: 'dateAdded' },
-  commission: { label: 'Commission', value: 'commission' }
-}
-
-const sortOrderOptions = {
-  desc: { label: 'Descending', value: 'desc' },
-  asc: { label: 'Ascending', value: 'asc' }
-}
-
-const commissionTypeOptions = {
-  Percent: { label: 'Percent', value: 'Percent' },
-  Fixed: { label: 'Fixed', value: 'Fixed' }
+  mostPopular: { label: 'Most popular', value: 'mostPopular' },
+  newlyAdded: { label: 'Newly added', value: 'newlyAdded' },
+  highestCommission: { label: 'Highest commission', value: 'highestCommission' }
 }
 
 const payoutStructureOptions = {
@@ -93,23 +77,14 @@ export default defineComponent({
     // prettier-ignore
     const schema = computed(() => object({
       page: string().default(query.value.page || undefined),
-      sortBy: string().default(query.value.sortBy || sortByOptions.popularity.value).defined(),
-      sortOrder: string().default(query.value.sortOrder || sortOrderOptions.desc.value).defined(),
-      commissionTypes: array().default(query.value.commissionTypes || []),
+      sortBy: string().default(query.value.sortBy || sortByOptions.mostPopular.value).defined(),
       payoutStructures: array().default(query.value.payoutStructures || []),
       categories: array().default(query.value.categories || [])
     }))
     const { fields, values, modified } = useForm(schema)
     emit('input', values.value)
-    const sortLabels = computed(() => ({
-      sortBy: sortByOptions[values.value.sortBy as keyof typeof sortByOptions].label,
-      sortOrder: sortOrderOptions[values.value.sortOrder as keyof typeof sortOrderOptions].label
-    }))
-    const searchSummary = computed(() => [
-      ...(values.value.categories || []),
-      ...(values.value.payoutStructures || []),
-      ...(values.value.commissionTypes || [])
-    ])
+    const sortByLabel = computed(() => sortByOptions[values.value.sortBy as keyof typeof sortByOptions].label)
+    const searchSummary = computed(() => [...(values.value.payoutStructures || []), ...(values.value.categories || [])])
     // prettier-ignore
     watch(values, () => {
       updateQuery(values.value)
@@ -120,12 +95,10 @@ export default defineComponent({
       fields,
       loading,
       modified,
-      sortLabels,
+      sortByLabel,
       sortByOptions,
       searchSummary,
-      sortOrderOptions,
       categoriesOptions,
-      commissionTypeOptions,
       payoutStructureOptions
     }
   }

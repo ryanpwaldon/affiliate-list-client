@@ -25,10 +25,8 @@ const validateArrayOfStrings = (value: any): string[] | undefined => {
 export default (allPrograms: any[], rawFilters: any) => {
   const filters = {
     page: validatePositiveInt(rawFilters.page, 1),
-    sortBy: validateString(rawFilters.sortBy, ['dateAdded', 'commission', 'popularity'], 'popularity'),
-    sortOrder: validateString(rawFilters.sortOrder, ['asc', 'desc'], 'desc'),
+    sortBy: validateString(rawFilters.sortBy, ['newlyAdded', 'highestCommission', 'mostPopular'], 'mostPopular'),
     categories: validateArrayOfStrings(rawFilters.categories),
-    commissionTypes: validateArrayOfStrings(rawFilters.commissionTypes),
     payoutStructures: validateArrayOfStrings(rawFilters.payoutStructures)
   }
 
@@ -39,16 +37,15 @@ export default (allPrograms: any[], rawFilters: any) => {
   const programs = allPrograms.filter((program) => {
     return (
       filters.categories ? filters.categories.some(category => program.categories.includes(category)) : true &&
-      filters.commissionTypes ? filters.commissionTypes.includes(program.commissionType) : true &&
       filters.payoutStructures ? filters.payoutStructures.includes(program.payoutStructure) : true
     )
   })
 
   // prettier-ignore
   const sortFunction = {
-    popularity: [{ [filters.sortOrder]: (program: any) => program.company }],
-    dateAdded: [{ [filters.sortOrder]: (program: any) => program.createdAt }],
-    commission: [ { [filters.sortOrder]: (program: any) => program.commissionPercentUpper }, { [filters.sortOrder]: (program: any) => program.commissionFixedUpper } ]
+    mostPopular: [{ desc: (program: any) => program.company }],
+    newlyAdded: [{ desc: (program: any) => program.createdAt }],
+    highestCommission: [ { desc: (program: any) => program.commissionPercentUpperBound }, { desc: (program: any) => program.commissionFixedUpperBound } ]
   }[filters.sortBy]
 
   const total = programs.length

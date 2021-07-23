@@ -29,7 +29,7 @@
       {{ program.excerpt }}
     </p>
     <div class="mt-5 space-y-3 text-xs font-medium text-gray-500">
-      <div class="flex justify-between">
+      <div class="flex justify-between" v-if="program.commissionDisplay">
         <p>Commission</p>
         <Badge :text="program.commissionDisplay" />
       </div>
