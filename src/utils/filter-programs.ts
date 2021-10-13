@@ -43,7 +43,7 @@ export default (allPrograms: any[], rawFilters: any) => {
 
   // prettier-ignore
   const sortFunction = {
-    mostPopular: [{ desc: (program: any) => program.company }],
+    mostPopular: [{ asc: (program: any) => program.company }],
     newlyAdded: [{ desc: (program: any) => program.createdAt }],
     highestCommission: [ { desc: (program: any) => program.commissionPercentUpperBound }, { desc: (program: any) => program.commissionFixedUpperBound } ]
   }[filters.sortBy]

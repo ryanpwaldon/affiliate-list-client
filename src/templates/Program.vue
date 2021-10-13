@@ -1,5 +1,5 @@
 <template>
-  <Layout max-width="max-w-4xl">
+  <Layout max-width="max-w-5xl">
     <h1 class="mt-16 font-serif text-4xl font-medium">Affiliate program</h1>
     <div class="flex items-center w-full mt-16 space-x-3">
       <div class="flex items-center justify-center flex-shrink-0 w-16 h-16 overflow-hidden border border-gray-300 rounded-full">
@@ -22,10 +22,14 @@
     <div class="w-full mt-5 border-b border-gray-300" />
     <div class="flex justify-between w-full mt-5">
       <div class="mr-32 space-y-6 whitespace-pre-line">
-        <p>{{ $page.program.excerpt }}</p>
+        <p>{{ $page.program.description }}</p>
         <div class="flex space-x-3">
-          <Button text="Visit homepage" theme="black" size="xs" />
-          <Button text="Join affiliate program" theme="black" size="xs" />
+          <a :href="$page.program.mainSite" target="_blank">
+            <Button text="Visit homepage" theme="black" size="xs" />
+          </a>
+          <a :href="$page.program.affiliateSite" target="_blank">
+            <Button text="Join affiliate program" theme="black" size="xs" />
+          </a>
         </div>
       </div>
       <div class="flex-shrink-0 w-full max-w-xs space-y-3">
@@ -33,7 +37,7 @@
           <p class="font-medium text-gray-500">Payout structure</p>
           <Badge :text="$page.program.payoutStructure" theme="white" />
         </div>
-        <div class="flex items-center justify-between">
+        <div class="flex items-center justify-between" v-if="$page.program.commissionDisplay">
           <p class="font-medium text-gray-500">Commission</p>
           <Badge :text="$page.program.commissionDisplay" theme="white" />
         </div>
@@ -59,8 +63,10 @@ query ($id: ID!) {
   program(id: $id) {
     id
     company
-    excerpt
+    description
     createdAt
+    mainSite
+    affiliateSite
     categories {
       name
       programs (limit: 3) {
